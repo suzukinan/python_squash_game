@@ -28,7 +28,7 @@ def main():
 
     ball_num = 3
     racket = Rect(RACKET_SIZE)
-    ball = Rect(surface.get_rect().centerx - 10, 0, BALL_SIZE)
+    ball = Rect(surface.get_rect().centerx - 10, 0, BALL_SIZE, BALL_SIZE)
     dir = randint(ANGLE, 180 - ANGLE)
     speed = INIT_SPEED
     game_over = False
@@ -60,7 +60,7 @@ def main():
           dir = randint(ANGLE, 180 - ANGLE)
         else:
           game_over = True
-      if racket.collidedict(ball):
+      if racket.colliderect(ball):
         dir = -(90 + (racket.centerx - ball.centerx) / racket.width * 100)
       if ball.centerx < 0 or ball.centerx > WIDTH:
         dir = 180 - dir
@@ -68,10 +68,10 @@ def main():
       surface.fill((255, 255, 255))
       if game_over:
         surface.blit(message_over, (message_pos))
-        pygame.draw.rect(surface, RACKET_COLOR, racket)
-        pygame.draw.ellipse(surface, BALL_COLOR, ball)
-        pygame.display.update()
-        clock.tick(30)
+      pygame.draw.rect(surface, RACKET_COLOR, racket)
+      pygame.draw.ellipse(surface, BALL_COLOR, ball)
+      pygame.display.update()
+      clock.tick(30)
 
 if __name__ == '__main__':
   main()
